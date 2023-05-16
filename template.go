@@ -7,15 +7,24 @@ import (
 	"text/template"
 )
 
+// Estructuras
+
+type Usuarios struct {
+	UserName string
+	Edad     int
+}
+
 // Handler
 func Index(rw http.ResponseWriter, r *http.Request) {
 	// fmt.Fprintf(rw, "Hola mundo")
 	template, err := template.ParseFiles("index.html")
 
+	usuario := Usuarios{"Reales", 25}
+
 	if err != nil {
 		panic(err)
 	} else {
-		template.Execute(rw, nil)
+		template.Execute(rw, usuario)
 	}
 
 }
