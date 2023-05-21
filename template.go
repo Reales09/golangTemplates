@@ -7,37 +7,49 @@ import (
 	"text/template"
 )
 
-// Estructuras
-type Usuarios struct {
-	UserName string
-	Edad     int
-	Activo   bool
-	Admin    bool
-	Cursos   []Curso
-}
+// // Estructuras
+// type Usuarios struct {
+// 	UserName string
+// 	Edad     int
+// 	Activo   bool
+// 	Admin    bool
+// 	Cursos   []Curso
+// }
 
-type Curso struct {
-	Nombre string
+// type Curso struct {
+// 	Nombre string
+// }
+
+// Funciones
+
+func Saludar(nombre string) string {
+	return "Hola " + nombre + " desde una función"
 }
 
 // Handler
 func Index(rw http.ResponseWriter, r *http.Request) {
+
+	funciones := template.FuncMap{
+		"saludar": Saludar,
+	}
+
 	// fmt.Fprintf(rw, "Hola mundo")
-	template, err := template.ParseFiles("index.html")
 
-	c1 := Curso{"Go"}
-	c2 := Curso{"Python"}
-	c3 := Curso{"Java"}
-	c4 := Curso{"JavaScript"}
+	template, err := template.New("index.html").Funcs(funciones).ParseFiles("index.html")
 
-	cursos := []Curso{c1, c2, c3, c4}
+	// c1 := Curso{"Go"}
+	// c2 := Curso{"Python"}
+	// c3 := Curso{"Java"}
+	// c4 := Curso{"JavaScript"}
 
-	usuario := Usuarios{"Reales", 32, true, false, cursos}
+	// cursos := []Curso{c1, c2, c3, c4}
+
+	// usuario := Usuarios{"Reales", 32, true, false, cursos}
 
 	if err != nil {
 		panic(err)
 	} else {
-		template.Execute(rw, usuario)
+		template.Execute(rw, nil)
 	}
 
 }
