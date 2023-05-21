@@ -26,6 +26,8 @@ func Saludar(nombre string) string {
 	return "Hola " + nombre + " desde una función"
 }
 
+var templates = template.Must(template.New("T").ParseFiles("index.html", "base.html"))
+
 // Handler
 func Index(rw http.ResponseWriter, r *http.Request) {
 
@@ -37,7 +39,17 @@ func Index(rw http.ResponseWriter, r *http.Request) {
 
 	// template, err := template.New("index.html").Funcs(funciones).ParseFiles("index.html")
 
-	template := template.Must(template.New("index.html").ParseFiles("index.html", "base.html"))
+	// template := template.Must(template.New("index.html").ParseFiles("index.html", "base.html"))
+
+	usuario := Usuarios{"Reales", 32}
+
+	// template.Execute(rw, usuario)
+	err := templates.ExecuteTemplate(rw, "index.html", usuario)
+
+	if err != nil {
+		panic(err)
+
+	}
 
 	// c1 := Curso{"Go"}
 	// c2 := Curso{"Python"}
@@ -47,10 +59,6 @@ func Index(rw http.ResponseWriter, r *http.Request) {
 	// cursos := []Curso{c1, c2, c3, c4}
 
 	// usuario := Usuarios{"Reales", 32, true, false, cursos}
-	usuario := Usuarios{"Reales", 32}
-
-	template.Execute(rw, usuario)
-
 }
 
 func main() {
