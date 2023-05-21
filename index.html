@@ -10,13 +10,19 @@
 
     <h1>Usuarios</h1>
 
+    <ul>
+        {{range .Cursos}}
+        <li>{{.Nombre}}</li>
+        {{end}}
+    </ul>
 
     <!-- 
         Operadores Logicos
         not !
         and &&
         0r ||
-    -->
+
+
 
     {{if not .Activo}}
     <p>El usuario esta activo en la plataforma</p>
@@ -28,7 +34,7 @@
     <p>Eres administrador</p>
     
     {{end}}
-
+-->
     <!-- Operadores condionales
     eq ==
     ne !=
@@ -37,16 +43,16 @@
     > gt
     >= ge    
     -->
-
+<!--
     {{if gt .Edad 22}}
     <p>Tiene mas de 22 años</p>
     {{end}}
-
+-->
     <!--
             <h3>Hola {{ .UserName }}</h3>
     <p>Edad: {{.Edad}}</p>
 
-    <!--Variables-->
+    Variables-->
 
    <!-- {{with $valor := "Mi varible"}}
 
