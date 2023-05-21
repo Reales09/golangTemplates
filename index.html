@@ -7,15 +7,55 @@
     <title>Index</title>
 </head>
 <body>
-    <h3>Hola {{ .UserName }}</h3>
+
+    <h1>Usuarios</h1>
+
+
+    <!-- 
+        Operadores Logicos
+        not !
+        and &&
+        0r ||
+    -->
+
+    {{if not .Activo}}
+    <p>El usuario esta activo en la plataforma</p>
+    {{else}}
+    <p>El usuario no esta activo en la plataforma</p>
+    {{end}}
+
+    {{if (and .Activo .Admid)}}
+    <p>Eres administrador</p>
+    
+    {{end}}
+
+    <!-- Operadores condionales
+    eq ==
+    ne !=
+    lt <
+    le <=
+    > gt
+    >= ge    
+    -->
+
+    {{if gt .Edad 22}}
+    <p>Tiene mas de 22 años</p>
+    {{end}}
+
+    <!--
+            <h3>Hola {{ .UserName }}</h3>
     <p>Edad: {{.Edad}}</p>
 
     <!--Variables-->
 
-    {{with $valor := "Mi varible"}}
+   <!-- {{with $valor := "Mi varible"}}
 
     <p>{{$valor}}</p>
     {{end}}
+
+
+    -->
+
     
 </body>
 </html>
