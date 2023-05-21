@@ -1,0 +1,4 @@
+# goweb
+.\template.go:45:16: not enough arguments in call to handlerError
+	have (http.ResponseWriter)
+	want (http.ResponseWriter, int)
