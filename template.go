@@ -8,13 +8,13 @@ import (
 )
 
 // // Estructuras
-// type Usuarios struct {
-// 	UserName string
-// 	Edad     int
-// 	Activo   bool
-// 	Admin    bool
-// 	Cursos   []Curso
-// }
+type Usuarios struct {
+	UserName string
+	Edad     int
+	// Activo   bool
+	// Admin    bool
+	// Cursos   []Curso
+}
 
 // type Curso struct {
 // 	Nombre string
@@ -29,13 +29,15 @@ func Saludar(nombre string) string {
 // Handler
 func Index(rw http.ResponseWriter, r *http.Request) {
 
-	funciones := template.FuncMap{
-		"saludar": Saludar,
-	}
+	// funciones := template.FuncMap{
+	// 	"saludar": Saludar,
+	// }
 
 	// fmt.Fprintf(rw, "Hola mundo")
 
-	template, err := template.New("index.html").Funcs(funciones).ParseFiles("index.html")
+	// template, err := template.New("index.html").Funcs(funciones).ParseFiles("index.html")
+
+	template, err := template.New("index.html").ParseFiles("index.html", "base.html")
 
 	// c1 := Curso{"Go"}
 	// c2 := Curso{"Python"}
@@ -45,11 +47,12 @@ func Index(rw http.ResponseWriter, r *http.Request) {
 	// cursos := []Curso{c1, c2, c3, c4}
 
 	// usuario := Usuarios{"Reales", 32, true, false, cursos}
+	usuario := Usuarios{"Reales", 32}
 
 	if err != nil {
 		panic(err)
 	} else {
-		template.Execute(rw, nil)
+		template.Execute(rw, usuario)
 	}
 
 }
