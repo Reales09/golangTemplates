@@ -37,7 +37,7 @@ func Index(rw http.ResponseWriter, r *http.Request) {
 
 	// template, err := template.New("index.html").Funcs(funciones).ParseFiles("index.html")
 
-	template, err := template.New("index.html").ParseFiles("index.html", "base.html")
+	template := template.Must(template.New("index.html").ParseFiles("index.html", "base.html"))
 
 	// c1 := Curso{"Go"}
 	// c2 := Curso{"Python"}
@@ -49,11 +49,7 @@ func Index(rw http.ResponseWriter, r *http.Request) {
 	// usuario := Usuarios{"Reales", 32, true, false, cursos}
 	usuario := Usuarios{"Reales", 32}
 
-	if err != nil {
-		panic(err)
-	} else {
-		template.Execute(rw, usuario)
-	}
+	template.Execute(rw, usuario)
 
 }
 
